@@ -15,60 +15,38 @@ FraudShield 360 is an end-to-end data engineering project that simulates real-ti
 
 ## Project Objective
 To build a scalable real-time data pipeline that ingests, processes, stores, and analyzes financial transaction data to detect fraud patterns.
+Python Transaction Producer (Local)
+        |
+        |  JSON Events (Real-time)
+        v
+Azure Event Hubs
+        |
+        |  Streaming Events
+        v
+Azure Databricks (PySpark Structured Streaming)
+        |
+        |  Parsed + Schema-Enforced Data
+        v
+Azure Data Lake Gen2 (Delta Lake)
+        |
+        |  Bronze Layer (Implemented)
+        |  - Raw validated transactions
+        |  - Append-only Delta tables
+        |  - Streaming checkpoints
+        |
+        |  Silver Layer (Planned)
+        |  - Fraud rule application
+        |  - Cleaned & enriched data
+        |
+        |  Gold Layer (Planned)
+        |  - Aggregated metrics
+        |  - BI-ready datasets
+        v
+Analytics & Visualization (Planned)
+        |
+        |  Azure Synapse
+        |  Power BI Dashboards
 
-┌───────────────────────────┐
-│  Transaction Producer     │
-│  (Python – Local Script)  │
-│  • Generates fake payments│
-│  • Sends JSON events      │
-└─────────────┬─────────────┘
-              │  (events)
-              ▼
-┌──────────────────────────┐
-│     Azure Event Hubs     │
-│  • Ingests real-time data│
-│  • Acts as event buffer  │
-│  • Kafka-like streaming  │
-└─────────────┬────────────┘
-              │  (stream)
-              ▼
-┌──────────────────────────┐
-│  Azure Databricks        │
-│  (PySpark Structured     │
-│   Streaming Engine)      │
-│                          │
-│  • Reads from Event Hub  │
-│  • Decodes binary → JSON │
-│  • Enforces schema       │
-│  • Streaming processing  │
-└─────────────┬────────────┘
-              │
-              ▼
-┌──────────────────────────┐
-│  ADLS Gen2 (Delta Lake)  │
-│                          │
-│  Bronze Layer            │
-│  • Raw validated events  │
-│  • Append-only Delta     │
-│  • Checkpointed writes   │
-│                          │
-│  Silver Layer (Planned)  │
-│  • Fraud rules applied   │
-│  • Cleaned & enriched    │
-│                          │
-│  Gold Layer (Planned)    │
-│  • Aggregated analytics  │
-│  • BI-ready datasets     │
-└─────────────┬────────────┘
-              │
-              ▼
-┌──────────────────────────┐
-│ Analytics & Reporting    │
-│                          │
-│ • Azure Synapse          │
-│ • Power BI Dashboards    │
-│ • Fraud insights & KPIs  │
-└──────────────────────────┘
 ---
 
 ## Key Features
