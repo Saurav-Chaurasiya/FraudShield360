@@ -15,7 +15,7 @@ FraudShield 360 is an end-to-end data engineering project that simulates real-ti
 
 ## Project Objective
 To build a scalable real-time data pipeline that ingests, processes, stores, and analyzes financial transaction data to detect fraud patterns.
-Python Transaction Producer (Local)
+<!-- Python Transaction Producer (Local)
         |
         |  JSON Events (Real-time)
         v
@@ -45,7 +45,21 @@ Azure Data Lake Gen2 (Delta Lake)
 Analytics & Visualization (Planned)
         |
         |  Azure Synapse
-        |  Power BI Dashboards
+        |  Power BI Dashboards -->
+
+Python Transaction Producer (Local)
+        │
+        ▼
+Azure Event Hubs
+        │
+        ▼
+Azure Databricks (PySpark Structured Streaming)
+        │
+        ▼
+Azure Data Lake Gen2 (Delta Lake)
+        │
+        ▼
+Analytics & Visualization (Planned)
 
 ---
 
