@@ -5,4 +5,4 @@
 - Transactions from multiple locations in short time
 - Sudden spike in transaction frequency
 
-Note: This project focuses on data engineering, not machine learning.
+Note: This project focuses on data engineering
