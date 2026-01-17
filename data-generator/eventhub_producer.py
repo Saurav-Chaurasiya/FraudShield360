@@ -5,8 +5,8 @@ from datetime import datetime
 from datetime import timezone
 from azure.eventhub import EventHubProducerClient, EventData, TransportType
 
-CONNECTION_STR = "EVENT_HUB_CONNECTION_STRING"
-EVENT_HUB_NAME = "EVENT_HUB_NAME"
+CONNECTION_STR = "Endpoint=sb://fraudshield-namespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=N9hyb8yOlniucWYAO2rEz4y4R59UCWq/1+AEhBUHjWI="
+EVENT_HUB_NAME = "transactions-hub"
 
 producer = EventHubProducerClient.from_connection_string(
     conn_str=CONNECTION_STR,
