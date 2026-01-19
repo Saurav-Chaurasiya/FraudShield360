@@ -3,72 +3,43 @@
 
 FraudShield 360 is an end-to-end data engineering project that simulates real-time financial transactions and processes them using cloud-native data pipelines to detect suspicious activity.
 
-## Tech Stack
-- Python
-- PySpark (Structured Streaming)
-- Azure Event Hubs
-- Azure Databricks
-- Azure Data Lake Gen2 (ADLS Gen2)
-- Azure Data Factory
-- Azure Synapse Analytics
-- Power BI
+---
+
+## Tech Stack & Tools
+- Python (Data generator & business logic)
+- Apache PySpark (Streaming injection & transformations)
+- Azure Event Hubs (Real-time transaction ingestion)
+- Azure Databricks (Distributed stream processing engine)
+- Azure Data Lake Gen2 (Scalable Delta Lake storage)
+- Power BI (Analytics & visualization)
+- Git & GitHub (Version control and project collaboration)
+
+---
 
 ## Project Objective
-To build a scalable real-time data pipeline that ingests, processes, stores, and analyzes financial transaction data to detect fraud patterns.
+To build a *scalable*, *fault-tolerant real-time data pipeline* that:
+- Ingests streaming financial transactions
+- Processes data using structured streaming
+- Stores data using *Medallion Architecture*
+- Enables fraud analysis and business insights through analytics
 
-┌───────────────────────────┐
-│  Transaction Producer     │
-│  (Python – Local Script)  │
-│  • Generates fake payments│
-│  • Sends JSON events      │
-└─────────────┬─────────────┘
-              │  (events)
-              ▼
-┌──────────────────────────┐
-│     Azure Event Hubs     │
-│  • Ingests real-time data│
-│  • Acts as event buffer  │
-│  • Kafka-like streaming  │
-└─────────────┬────────────┘
-              │  (stream)
-              ▼
-┌──────────────────────────┐
-│  Azure Databricks        │
-│  (PySpark Structured     │
-│   Streaming Engine)      │
-│                          │
-│  • Reads from Event Hub  │
-│  • Decodes binary → JSON │
-│  • Enforces schema       │
-│  • Streaming processing  │
-└─────────────┬────────────┘
-              │
-              ▼
-┌──────────────────────────┐
-│  ADLS Gen2 (Delta Lake)  │
-│                          │
-│  Bronze Layer            │
-│  • Raw validated events  │
-│  • Append-only Delta     │
-│  • Checkpointed writes   │
-│                          │
-│  Silver Layer (Planned)  │
-│  • Fraud rules applied   │
-│  • Cleaned & enriched    │
-│                          │
-│  Gold Layer (Planned)    │
-│  • Aggregated analytics  │
-│  • BI-ready datasets     │
-└─────────────┬────────────┘
-              │
-              ▼
-┌──────────────────────────┐
-│ Analytics & Reporting    │
-│                          │
-│ • Azure Synapse          │
-│ • Power BI Dashboards    │
-│ • Fraud insights & KPIs  │
-└──────────────────────────┘
+---
+
+## Analytics Objective
+Provide actionable insights into:
+- Fraud trends over time
+- Fraud distribution by location
+- Fraud rate analysis
+- Business-level KPIs for decision-making
+
+---
+
+## 🏗️ Architecture Overview
+
+<p align="center">
+  <img src="/diagrams/architecture.png" alt="FraudShield 360 Architecture" width="900"/>
+</p>
+
 ---
 
 ## Key Features
@@ -78,30 +49,50 @@ To build a scalable real-time data pipeline that ingests, processes, stores, and
 - Schema-based validation using PySpark
 - Fault-tolerant streaming with checkpointing
 - Bronze–Silver–Gold data modeling
-- Rule-based fraud detection logic (in progress)
+- Rule-based fraud detection logic 
 - Analytics-ready dataset design
 
 ---
 
-## Streaming Ingestion & Bronze Layer (Implemented)
+## Medallion Architecture
 
-### What Works Today
-- Real-time transaction events are produced using Python
-- Events are ingested continuously from Azure Event Hubs into Databricks
-- Binary messages are decoded and parsed into structured columns
-- Streaming DataFrame is enriched with ingestion metadata
-- Data is successfully written to **ADLS Gen2 as Delta tables (Bronze layer)**
-- Checkpointing is enabled to ensure fault tolerance and exactly-once processing
-- Streaming performance is monitored via Databricks Streaming UI
+### Bronze Layer
+- Raw transaction events from Event Hub
+- Schema validation using PySpark
+- Appended-only Delta tables
+- Exactly-once processing with checkpointing
 
-### Technologies Used
-- Azure Event Hubs (Kafka-like event streaming)
-- Databricks Structured Streaming
-- Delta Lake on ADLS Gen2
-- Explicit schema enforcement for streaming safety
+### Silver Layer
+- Data cleansing and enrichment
+- Rule-based fraud detection
+- Fraud flags and fraud reasons added
+
+### Gold Layer
+- Fraud flags and fraud reasons added
+- Fraud KPIs and summary tables
+- Optimized for Power BI consumption
 
 ---
 
-## Project Status
-🚧 **Active Development**  
-Bronze streaming pipeline is fully operational. Silver and Gold layers are under development.
+##  Power BI Dashboard
+The Power BI dashboard includes:
+- Total Transactions
+- Total Fraud Amount
+- Fraud Transactions Count
+- Fraud Rate by Location
+- Transactions Trend by Year
+- Fraud vs Total Amount Comparison
+
+---
+
+## Why This Project Matters
+FraudShield 360 reflects real-world data engineering practices used in:
+- Banking & Financial services
+- Payment gateways
+- Risk & compilance systems
+- Real-time analytics platforms
+
+It demonstrates strong understanding of:
+- Streaming systems
+- Data modeling
+- Analytics and visualization

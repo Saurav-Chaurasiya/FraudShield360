@@ -5,8 +5,8 @@ from datetime import datetime
 from datetime import timezone
 from azure.eventhub import EventHubProducerClient, EventData, TransportType
 
-CONNECTION_STR = "<EVENT-CONNECTION-STRING>"
-EVENT_HUB_NAME = "transactions-hub"
+CONNECTION_STR = "<EVENT_HUB_CONNECTION_STRING>"
+EVENT_HUB_NAME = "<EVENT_HUB_NAME>"
 
 producer = EventHubProducerClient.from_connection_string(
     conn_str=CONNECTION_STR,

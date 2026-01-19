@@ -1,42 +1,24 @@
-## Engineering Challenges & Solutions
+## ⚙️ Engineering Challenges & Solutions
 
 ### Challenges Encountered
-- Event Hub connection failures due to missing `EntityPath`
-- Databricks workspace restrictions on public DBFS paths
-- Checkpointing limitations without external storage
-- OAuth / Managed Identity configuration complexity for ADLS Gen2
-- Streaming queries terminating due to invalid storage access
+- Event Hub connection failures due to missing `EntityPath` in the connection string  
+- Databricks workspace restrictions on public DBFS paths  
+- Streaming checkpoint failures without external storage  
+- OAuth / Managed Identity configuration complexity for ADLS Gen2  
+- Streaming queries terminating due to insufficient storage permissions  
+
+---
 
 ### Resolution Strategy
-- Corrected Event Hub connection string to include `EntityPath`
-- Used ADLS Gen2 (`abfss://`) paths for both data and checkpoints
+- Corrected Event Hub connection string to explicitly include `EntityPath`
+- Migrated all streaming **data paths and checkpoints** to ADLS Gen2 using `abfss://`
+- Configured **external checkpoint storage** for fault-tolerant streaming
 - Switched to **storage account key–based authentication** for MVP stability
-- Explicitly configured Spark with ADLS access
-- Validated storage access before starting streaming writes
+- Explicitly configured Spark session with ADLS access
+- Validated storage connectivity before launching streaming jobs
 
-> **Engineering decision:**  
-> Managed Identity (OAuth/MSI) was explored and documented. Due to cluster-level OAuth configuration complexity and project timelines, key-based authentication was used for the MVP. IAM-based authentication is planned for production hardening.
-
----
-
-## Current Pipeline Status
-
-| Layer  | Status |
-|------|------|
-| Event Producer | ✅ Implemented |
-| Event Hub Ingestion | ✅ Implemented |
-| Bronze (Delta Lake) | ✅ Implemented |
-| Silver (Fraud Rules) | 🚧 In Progress |
-| Gold (Analytics) | ⏳ Planned |
-| Power BI Dashboard | ⏳ Planned |
-
----
-
-## Key Learnings
-- Real-time systems require strict schema enforcement
-- Event-driven pipelines behave differently from batch systems
-- Checkpointing is critical for streaming reliability
-- Cloud IAM can be complex; multiple authentication strategies should be understood
-- Delivering a working MVP while documenting production alternatives is a real-world engineering skill
+> **Engineering Decision**  
+> Managed Identity (OAuth/MSI) was explored and documented. Due to cluster-level OAuth configuration complexity and project timelines, **key-based authentication was used for the MVP**.  
+> IAM-based authentication is planned as part of production hardening.
 
 ---
