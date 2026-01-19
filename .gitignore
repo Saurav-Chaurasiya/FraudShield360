@@ -1,2 +1,16 @@
+# Secrets
+*.env
+*.key
 
+# Python
+__pycache__/
+*.pyc
+
+# Databricks
+.dbfs
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
 
