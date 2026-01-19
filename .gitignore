@@ -1,8 +1,2 @@
-# Secrets
-*.env
-*.key
 
-# OS
-.DS_Store
-Thumbs.db
 
